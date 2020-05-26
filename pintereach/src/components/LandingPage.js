@@ -11,7 +11,8 @@ function LandingPage() {
       <div className="form">
         <Link to='/login'><button>Log In</button></Link>
         <Link to='/register'><button>Register</button></Link>
-        <Link to='/dashboard'><button>Dashboard</button></Link>
+        <Link to='/dashboard'><button>Dashboard Private</button></Link>
+        <Link to='/dashboard-public'><button>Dashboard Public</button></Link>
       </div>
     </div>
   );

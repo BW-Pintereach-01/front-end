@@ -12,7 +12,7 @@ function App() {
         <Route exact path='/' component={LandingPage} />
         <Route exact path="/login" component={Login} />
         <Route path='/register' component={Register} />
-        {/* <Route path='/dashboard' component={Dashboard} /> */}
+        <Route path='/dashboard-public' component={Dashboard} />
         <PrivateRoute exact path="/protected" component={Dashboard} />
     </Router>
   );
