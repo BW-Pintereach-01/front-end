@@ -27,8 +27,8 @@ class Register extends React.Component {
       .then(res => {
         // set token to localStorage (sessions)
         localStorage.setItem("token", res.data.payload);
-        // navigate user to "/protected" route
-        this.props.history.push("/protected");
+        // // navigate user to "/protected" route
+        // this.props.history.push("/protected");
       })
       .catch(err => console.log(err));
   };

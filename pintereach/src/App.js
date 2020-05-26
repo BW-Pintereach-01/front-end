@@ -4,7 +4,7 @@ import LandingPage from './components/LandingPage'
 import Login from "./components/Login";
 import Register from './components/Register'
 import Dashboard from './components/Dashboard'
-// import PrivateRoute from "./components/PrivateRoute"
+import PrivateRoute from "./components/PrivateRoute"
 
 function App() {
   return (
@@ -12,8 +12,8 @@ function App() {
         <Route exact path='/' component={LandingPage} />
         <Route exact path="/login" component={Login} />
         <Route path='/register' component={Register} />
-        <Route path='/dashboard' component={Dashboard} />
-        {/* <PrivateRoute exact path="/protected" component={Dashboard} /> */}
+        {/* <Route path='/dashboard' component={Dashboard} /> */}
+        <PrivateRoute exact path="/protected" component={Dashboard} />
     </Router>
   );
 }
