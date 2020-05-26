@@ -4,6 +4,7 @@ import LandingPage from './components/LandingPage'
 import LoginPage from "./components/LoginPage";
 import RegisterPage from './components/RegisterPage'
 import Dashboard from './components/Dashboard'
+import PrivateRoute from "./components/PrivateRoute"
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
         <Route exact path='/' component={LandingPage} />
         <Route exact path="/login" component={LoginPage} />
         <Route path='/register' component={RegisterPage} />
-        <Route path='/dashboard' component={Dashboard} />
+        <PrivateRoute exact path="/protected" component={Dashboard} />
     </Router>
   );
 }

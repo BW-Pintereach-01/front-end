@@ -10,20 +10,8 @@ function RegisterPage() {
           <input type="text" id="username" placeholder="Enter username" />
         </div>
         <div className="form-control">
-          <label for="email">Email</label>
-          <input type="text" id="email" placeholder="Enter email" />
-        </div>
-        <div className="form-control">
           <label for="password">Password</label>
           <input type="password" id="password" placeholder="Enter password" />
-        </div>
-        <div className="form-control">
-          <label for="password2">Confirm Password</label>
-          <input
-            type="password"
-            id="password2"
-            placeholder="Enter password again"
-          />
         </div>
         <button type="submit">Submit</button>
       </form>
