@@ -1,7 +1,7 @@
 import React from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-class Login extends React.Component {
+class Register extends React.Component {
   state = {
     credentials: {
       username: "",
@@ -18,12 +18,12 @@ class Login extends React.Component {
     });
   };
 
-  login = e => {
+  register = e => {
     e.preventDefault();
     axiosWithAuth()
-      .post("/api/auth/login", this.state.credentials)
-      // POST request to login endpoint
-      // if creds match what's in database, server returns JSON web token
+      .post("/api/auth/register", this.state.credentials)
+      // POST request to register endpoint
+      // if creds are valid server returns JSON web token
       .then(res => {
         // set token to localStorage (sessions)
         localStorage.setItem("token", res.data.payload);
@@ -36,8 +36,8 @@ class Login extends React.Component {
   render() {
     return (
       <div className="container">
-      <form id="form" className="form" onSubmit={this.login}>
-        <h2>Login</h2>
+      <form id="form" className="form" onSubmit={this.register}>
+        <h2>Register</h2>
         <div className="form-control">
           <label htmlFor="username">Username</label>
           <input
@@ -56,11 +56,11 @@ class Login extends React.Component {
             onChange={this.handleChange}
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
     </div>
     );
   }
 }
 
-export default Login;
+export default Register;
