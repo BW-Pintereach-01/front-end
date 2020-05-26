@@ -1,5 +1,5 @@
 import React from "react";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+// import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 class Login extends React.Component {
   state = {
@@ -18,20 +18,20 @@ class Login extends React.Component {
     });
   };
 
-  login = e => {
-    e.preventDefault();
-    // POST request to login endpoint
-    // if creds match what's in database, server returns JSON web token
-    // set token to localStorage (sessions)
-    // navigate user to "/protected" route
-    axiosWithAuth()
-      .post("/api/login", this.state.credentials)
-      .then(res => {
-        localStorage.setItem("token", res.data.payload);
-        this.props.history.push("/protected");
-      })
-      .catch(err => console.log(err));
-  };
+  // login = e => {
+  //   e.preventDefault();
+  //   axiosWithAuth()
+  //     .post("/api/login", this.state.credentials)
+  //     // POST request to login endpoint
+  //     // if creds match what's in database, server returns JSON web token
+  //     .then(res => {
+  //       // set token to localStorage (sessions)
+  //       localStorage.setItem("token", res.data.payload);
+  //       // navigate user to "/protected" route
+  //       this.props.history.push("/protected");
+  //     })
+  //     .catch(err => console.log(err));
+  // };
 
   render() {
     return (
@@ -39,7 +39,7 @@ class Login extends React.Component {
       <form id="form" className="form" onSubmit={this.login}>
         <h2>Login</h2>
         <div className="form-control">
-          <label for="username">Username</label>
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             name="username"
@@ -48,7 +48,7 @@ class Login extends React.Component {
           />
         </div>
         <div className="form-control">
-          <label for="password">Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"

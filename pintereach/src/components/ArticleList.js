@@ -10,7 +10,6 @@ class ArticleList extends React.Component {
             key={article.id}
             id={id}
             article={article}
-            markComplete={this.props.markComplete}
           />
         ))}
       </ul>
