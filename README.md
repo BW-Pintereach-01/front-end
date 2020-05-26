@@ -17,9 +17,9 @@ Inside the LandingPage component are links to the login page, register page, and
 <Link to='/dashboard'><button>Dashboard</button></Link>
 ```
 
-Inside the Dashboard component are all the components and functions for rendering articles, adding articles, toggling articles as read, and deleting articles that have been toggled read.
+Inside the Dashboard component are all the components and functions for rendering and adding articles.
 
 ```javascript
-<ArticleList article={this.state.article} markComplete={this.markComplete} />
-<ArticleForm addArticle={this.addArticle} clearCompleted={this.clearCompleted} />
+<ArticleList article={this.state.article} />
+<ArticleForm addArticle={this.addArticle} />
 ```
