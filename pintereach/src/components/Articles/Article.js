@@ -10,7 +10,7 @@ function Article({ articleList, setArticleList }) {
 
   const fetchArticle = (id) => {
     axios
-      .get(`http://localhost:5000/api/articles/${id}`)
+      .get(`/api/articles/${id}`)
       .then((res) => setArticle(res.data))
       .catch((err) => console.log(err.response));
   };
@@ -21,7 +21,7 @@ function Article({ articleList, setArticleList }) {
 
   const deleteArticle = () => {
     axios
-      .delete(`http://localhost:5000/api/articles/${params.id}`)
+      .delete(`/api/articles/${params.id}`)
       .then(res => console.log(res))
       .catch(err => console.log(err))
     setArticleList(articleList.filter(article => Number(article.id) !== Number(params.id)));

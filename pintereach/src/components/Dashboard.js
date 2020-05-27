@@ -14,7 +14,7 @@ const Dashboard = () => {
 
   const getArticleList = () => {
     axios
-      .get("http://localhost:5000/api/articles")
+      .get("/api/articles")
       .then(res => setArticleList(res.data))
       .catch(err => console.log(err.response));
   };

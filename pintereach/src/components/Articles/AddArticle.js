@@ -17,7 +17,7 @@ const AddArticle = ({articleList, setArticleList}) => {
   const handleSubmit = e => {
     e.preventDefault();
     axios
-      .post(`http://localhost:5000/api/articles`, article)
+      .post(`/api/articles`, article)
       .then((response) => setArticleList(response.data))
       .catch((error) => console.log(error.response));
     push('/');

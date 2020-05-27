@@ -11,7 +11,7 @@ const UpdateArticle = ({articleList, setArticleList}) => {
 
   const getArticle = (id) => {
     axios
-      .get(`http://localhost:5000/api/articles/${id}`)
+      .get(`/api/articles/${id}`)
       .then((response) => setArticle(response.data))
       .catch((error) => console.log(error.response));
   };
@@ -25,7 +25,7 @@ const UpdateArticle = ({articleList, setArticleList}) => {
   const handleSubmit = e => {
     e.preventDefault();
     axios
-      .put(`http://localhost:5000/api/articles/${params.id}`, article)
+      .put(`/api/articles/${params.id}`, article)
       .then((response) => console.log(response))
       .catch((error) => console.log(error.response));
 
