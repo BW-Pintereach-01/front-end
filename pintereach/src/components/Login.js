@@ -25,6 +25,7 @@ class Login extends React.Component {
       // POST request to login endpoint
       // if creds match what's in database, server returns JSON web token
       .then(res => {
+        console.log(res)
         // set token to localStorage (sessions)
         localStorage.setItem("token", res.data.token);
         // navigate user to "/protected" route
