@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {useHistory} from "react-router-dom";
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
-
-const initialState = {
-  title: '', author: '', link: '', category: '', user_id: null
-}
+import {ArticleContext} from '../../context/ArticleContext'
 
 const AddArticle = () => {
-  const [article, setArticle] = useState(initialState);
+  const [article, setArticle] = useState({
+    title: '', author: '', link: '', category: '', user_id: null
+  });
+  const {userId} = useContext(ArticleContext)
   const {push} = useHistory();
-
+  console.log(userId)
   const handleChange = e => {
-    setArticle({ ...article, [e.target.name]: e.target.value})
+    setArticle({ ...article, [e.target.name]: e.target.value, user_id: userId.user_id})
   }
 
   const handleSubmit = e => {

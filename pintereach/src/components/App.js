@@ -11,6 +11,8 @@ import {ArticleContext} from '../context/ArticleContext'
 
 const App = () => {
   const [articleList, setArticleList] = useState([]);
+  const [credentials, setCredential] = useState([]);
+  const [userId, setUserId] = useState({user_id: null})
 
   const getArticleList = () => {
     axiosWithAuth()
@@ -25,7 +27,7 @@ const App = () => {
 
   return (
     <>
-    <ArticleContext.Provider value={{articleList, setArticleList}}>
+    <ArticleContext.Provider value={{articleList, setArticleList, credentials, setCredential, userId, setUserId}}>
       <Link to="/"><button>Home</button></Link>
       <Link to="/add-article"><button>Add Article</button></Link>
       <Link to="/login"><button>Login</button></Link>
@@ -33,7 +35,7 @@ const App = () => {
       <Link to="/articles"><button>Articles</button></Link>
 
       <Route path="/login">
-        <Login />
+        <Login credentials={credentials} setCredential={setCredential}/>
       </Route>
       <Route exact path="/register" component={Register} />
 
