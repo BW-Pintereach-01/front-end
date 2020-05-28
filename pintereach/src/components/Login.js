@@ -21,14 +21,15 @@ class Login extends React.Component {
   login = e => {
     e.preventDefault();
     axiosWithAuth()
-      .post("/api/auth/login", this.state.credentials)
+      .post("https://pintereach-1.herokuapp.com/api/auth/login", this.state.credentials)
       // POST request to login endpoint
       // if creds match what's in database, server returns JSON web token
       .then(res => {
         // set token to localStorage (sessions)
-        localStorage.setItem("token", res.data.payload);
+        console.log(`login: ${res}`)
+        localStorage.setItem("token", res.data.token);
         // navigate user to "/protected" route
-        this.props.history.push("/protected");
+        this.props.history.push("/");
       })
       .catch(err => console.log(err));
   };

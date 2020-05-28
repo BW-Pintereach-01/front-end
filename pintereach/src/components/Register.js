@@ -21,14 +21,15 @@ class Register extends React.Component {
   register = e => {
     e.preventDefault();
     axiosWithAuth()
-      .post("/api/auth/register", this.state.credentials)
+      .post("https://pintereach-1.herokuapp.com/api/auth/register", this.state.credentials)
       // POST request to register endpoint
       // if creds are valid server returns JSON web token
       .then(res => {
         // set token to localStorage (sessions)
-        localStorage.setItem("token", res.data.payload);
+        console.log(`register: ${res}`)
+        localStorage.setItem("token", res.data.token);
         // // navigate user to "/protected" route
-        this.props.history.push("/protected");
+        this.props.history.push("/");
       })
       .catch(err => console.log(err));
   };
