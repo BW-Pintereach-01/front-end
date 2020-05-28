@@ -5,7 +5,7 @@ import {ArticleContext} from '../context/ArticleContext'
 const initialState = {
   username: '',
   password: '',
-  user_id: null,
+  users_id: null,
 };
 
 const Login = () => {
@@ -23,7 +23,7 @@ const Login = () => {
     axiosWithAuth()
       .post("https://pintereach-1.herokuapp.com/api/auth/login", credentials)
       .then(res => {
-        setUserId({...userId, user_id: res.data.user_id})
+        setUserId({...userId, users_id: res.data.user_id})
         console.log(userId)
         localStorage.setItem("token", res.data.token);
         this.props.history.push("/");

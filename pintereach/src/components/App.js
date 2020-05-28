@@ -12,7 +12,7 @@ import {ArticleContext} from '../context/ArticleContext'
 const App = () => {
   const [articleList, setArticleList] = useState([]);
   const [credentials, setCredential] = useState([]);
-  const [userId, setUserId] = useState({user_id: null})
+  const [userId, setUserId] = useState({users_id: null})
 
   const getArticleList = () => {
     axiosWithAuth()
