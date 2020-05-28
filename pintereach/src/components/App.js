@@ -2,19 +2,18 @@ import React, {useState, useEffect} from "react";
 import {Route, Link} from "react-router-dom";
 import ArticleList from "./Articles/ArticleList";
 import Article from "./Articles/Article";
-import axios from 'axios';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import UpdateArticle from "./Articles/UpdateArticle";
 import AddArticle from "./Articles/AddArticle";
 import Login from "./Login";
 import Register from "./Register";
-import PrivateRoute from './PrivateRoute'
-import {ArticleContext} from './context/ArticleContext'
+import {ArticleContext} from '../context/ArticleContext'
 
 const App = () => {
   const [articleList, setArticleList] = useState([]);
 
   const getArticleList = () => {
-    axios
+    axiosWithAuth()
       .get("https://pintereach-1.herokuapp.com/api/articles")
       .then(res => {
         console.log(`getArticleList: ${res}`)
@@ -31,21 +30,26 @@ const App = () => {
       <Link to="/add-article"><button>Add Article</button></Link>
       <Link to="/login"><button>Login</button></Link>
       <Link to="/register"><button>Register</button></Link>
+      <Link to="/articles"><button>Articles</button></Link>
 
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
 
-      <PrivateRoute path="/articles" component={ArticleList} />
-        {/* <ArticleList articles={articleList} /> */}
+      <Route path="/articles">
+        <ArticleList articles={articleList} />
+      </Route>
 
-      <PrivateRoute path="/articles/:id" component={Article} />
-        {/* <Article articleList={articleList} setArticleList={setArticleList} /> */}
+      <Route path="/articles/:id">
+        <Article articleList={articleList} setArticleList={setArticleList} />
+      </Route>
 
-      <PrivateRoute path="/update-article/:id" component={UpdateArticle} />
-        {/* <UpdateArticle articleList={articleList} setArticleList={setArticleList} /> */}
+      <Route path="/update-articles/:id">
+        <UpdateArticle articleList={articleList} setArticleList={setArticleList} />
+      </Route>
 
-      <PrivateRoute path="/add-article" component={AddArticle} />
-        {/* <AddArticle articleList={articleList} setArticleList={setArticleList} /> */}
+      <Route path="/add-article">
+      <AddArticle articleList={articleList} setArticleList={setArticleList} />
+      </Route>
     </ArticleContext.Provider>
     </>
   );

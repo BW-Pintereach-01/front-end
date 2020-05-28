@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios";
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import {useParams} from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 import {Link} from "react-router-dom";
@@ -9,7 +9,7 @@ function Article({ articleList, setArticleList }) {
   const params = useParams();
 
   const fetchArticle = (id) => {
-    axios
+    axiosWithAuth()
       .get(`https://pintereach-1.herokuapp.com/api/articles/${id}`)
       .then((res) => {
         console.log(`fetchArticle: ${res}`)
@@ -22,7 +22,7 @@ function Article({ articleList, setArticleList }) {
   if (!article) {return <div>Loading article information...</div>;}
 
   const deleteArticle = () => {
-    axios
+    axiosWithAuth()
       .delete(`https://pintereach-1.herokuapp.com/api/articles/${params.id}`)
       .then(res => console.log(`deleteArticle: ${res}`))
       .catch(err => console.log(err))

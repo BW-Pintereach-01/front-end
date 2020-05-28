@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useHistory} from "react-router-dom";
-import axios from 'axios';
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
 
 const initialState = {
   title: '', author: '', link: '', category: ''
@@ -16,7 +16,7 @@ const AddArticle = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    axios
+    axiosWithAuth()
       .post(`https://pintereach-1.herokuapp.com/api/articles`, article)
       .then((res) => {
         console.log(res)
