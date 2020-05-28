@@ -6,7 +6,7 @@ const initialState = {
   title: '', author: '', link: '', category: ''
 }
 
-const AddArticle = ({articleList, setArticleList}) => {
+const AddArticle = () => {
   const [article, setArticle] = useState(initialState);
   const {push} = useHistory();
 
@@ -20,7 +20,7 @@ const AddArticle = ({articleList, setArticleList}) => {
       .post(`https://pintereach-1.herokuapp.com/api/articles`, article)
       .then((res) => {
         console.log(res)
-        setArticleList(res.data)})
+        setArticle(res.data)})
       .catch((err) => console.log(err.res));
     push('/');
   }
