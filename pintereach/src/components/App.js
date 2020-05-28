@@ -15,7 +15,7 @@ const App = () => {
 
   const getArticleList = () => {
     axios
-      .get("/api/articles")
+      .get("https://pintereach-1.herokuapp.com/api/articles")
       .then(res => {
         console.log(`getArticleList: ${res}`)
         setArticleList(res.data)})

@@ -17,7 +17,7 @@ const AddArticle = ({articleList, setArticleList}) => {
   const handleSubmit = e => {
     e.preventDefault();
     axios
-      .post(`/api/articles`, article)
+      .post(`https://pintereach-1.herokuapp.com/api/articles`, article)
       .then((res) => {
         console.log(res)
         setArticleList(res.data)})

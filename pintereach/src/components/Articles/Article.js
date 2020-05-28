@@ -10,7 +10,7 @@ function Article({ articleList, setArticleList }) {
 
   const fetchArticle = (id) => {
     axios
-      .get(`/api/articles/${id}`)
+      .get(`https://pintereach-1.herokuapp.com/api/articles/${id}`)
       .then((res) => {
         console.log(`fetchArticle: ${res}`)
         setArticle(res.data)})
@@ -23,7 +23,7 @@ function Article({ articleList, setArticleList }) {
 
   const deleteArticle = () => {
     axios
-      .delete(`/api/articles/${params.id}`)
+      .delete(`https://pintereach-1.herokuapp.com/api/articles/${params.id}`)
       .then(res => console.log(`deleteArticle: ${res}`))
       .catch(err => console.log(err))
     setArticleList(articleList.filter(article => Number(article.id) !== Number(params.id)));
