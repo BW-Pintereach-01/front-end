@@ -16,7 +16,7 @@ const App = () => {
     axiosWithAuth()
       .get("https://pintereach-1.herokuapp.com/api/articles")
       .then(res => {
-        console.log(`getArticleList: ${res}`)
+        console.log(`getArticleList: ${JSON.stringify(res)}`)
         setArticleList(res.data)})
       .catch(err => console.log(err.res));
   };

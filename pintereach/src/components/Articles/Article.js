@@ -12,7 +12,7 @@ function Article({ articleList, setArticleList }) {
     axiosWithAuth()
       .get(`https://pintereach-1.herokuapp.com/api/articles/${id}`)
       .then((res) => {
-        console.log(`fetchArticle: ${res}`)
+        console.log(`fetchArticle: ${JSON.stringify(res)}`)
         setArticle(res.data)})
       .catch((err) => console.log(err.res));
   };
@@ -24,7 +24,7 @@ function Article({ articleList, setArticleList }) {
   const deleteArticle = () => {
     axiosWithAuth()
       .delete(`https://pintereach-1.herokuapp.com/api/articles/${params.id}`)
-      .then(res => console.log(`deleteArticle: ${res}`))
+      .then(res => console.log(`deleteArticle: ${JSON.stringify(res)}`))
       .catch(err => console.log(err))
     setArticleList(articleList.filter(article => Number(article.id) !== Number(params.id)));
   }

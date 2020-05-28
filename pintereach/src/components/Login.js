@@ -26,7 +26,7 @@ class Login extends React.Component {
       // if creds match what's in database, server returns JSON web token
       .then(res => {
         // set token to localStorage (sessions)
-        console.log(`login: ${res}`)
+        console.log(`login: ${JSON.stringify(res)}`)
         localStorage.setItem("token", res.data.token);
         // navigate user to "/protected" route
         this.props.history.push("/");

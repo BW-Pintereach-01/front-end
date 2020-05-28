@@ -19,7 +19,7 @@ const AddArticle = () => {
     axiosWithAuth()
       .post(`https://pintereach-1.herokuapp.com/api/articles`, article)
       .then((res) => {
-        console.log(res)
+        console.log(`setArticle: ${JSON.stringify(res)}`)
         setArticle(res.data)})
       .catch((err) => console.log(err.res));
     push('/');
