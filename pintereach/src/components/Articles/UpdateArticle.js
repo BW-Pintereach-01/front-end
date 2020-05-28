@@ -11,9 +11,11 @@ const UpdateArticle = ({articleList, setArticleList}) => {
 
   const getArticle = (id) => {
     axios
-      .get(`http://localhost:5000/api/articles/${id}`)
-      .then((response) => setArticle(response.data))
-      .catch((error) => console.log(error.response));
+      .get(`/api/articles/${id}`)
+      .then((res) => {
+        console.log(`getArticle: ${res}`)
+        setArticle(res.data)})
+      .catch((error) => console.log(error.res));
   };
 
   useEffect(() => {getArticle(params.id);}, [params.id])
@@ -25,9 +27,9 @@ const UpdateArticle = ({articleList, setArticleList}) => {
   const handleSubmit = e => {
     e.preventDefault();
     axios
-      .put(`http://localhost:5000/api/articles/${params.id}`, article)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error.response));
+      .put(`/api/articles/${params.id}`, article)
+      .then((res) => console.log(`setArticle: ${res}`))
+      .catch((error) => console.log(error.res));
 
     const newArticleList = articleList.map(e => {
       if(Number(e.id) === Number(params.id)) return article;

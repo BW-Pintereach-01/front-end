@@ -26,6 +26,7 @@ class Register extends React.Component {
       // if creds are valid server returns JSON web token
       .then(res => {
         // set token to localStorage (sessions)
+        console.log(`register: ${res}`)
         localStorage.setItem("token", res.data.token);
         // // navigate user to "/protected" route
         this.props.history.push("/protected");

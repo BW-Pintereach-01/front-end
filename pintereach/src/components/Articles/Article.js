@@ -10,9 +10,11 @@ function Article({ articleList, setArticleList }) {
 
   const fetchArticle = (id) => {
     axios
-      .get(`http://localhost:5000/api/articles/${id}`)
-      .then((res) => setArticle(res.data))
-      .catch((err) => console.log(err.response));
+      .get(`/api/articles/${id}`)
+      .then((res) => {
+        console.log(`fetchArticle: ${res}`)
+        setArticle(res.data)})
+      .catch((err) => console.log(err.res));
   };
 
   useEffect(() => {fetchArticle(params.id);}, [params.id]);
@@ -21,8 +23,8 @@ function Article({ articleList, setArticleList }) {
 
   const deleteArticle = () => {
     axios
-      .delete(`http://localhost:5000/api/articles/${params.id}`)
-      .then(res => console.log(res))
+      .delete(`/api/articles/${params.id}`)
+      .then(res => console.log(`deleteArticle: ${res}`))
       .catch(err => console.log(err))
     setArticleList(articleList.filter(article => Number(article.id) !== Number(params.id)));
   }

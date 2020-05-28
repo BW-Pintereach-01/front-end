@@ -15,9 +15,11 @@ const App = () => {
 
   const getArticleList = () => {
     axios
-      .get("http://localhost:5000/api/articles")
-      .then(res => setArticleList(res.data))
-      .catch(err => console.log(err.response));
+      .get("/api/articles")
+      .then(res => {
+        console.log(`getArticleList: ${res}`)
+        setArticleList(res.data)})
+      .catch(err => console.log(err.res));
   };
 
   useEffect(() => {getArticleList();}, []);
