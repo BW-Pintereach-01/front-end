@@ -8,8 +8,9 @@ import AddArticle from "./Articles/AddArticle";
 import Login from "./Login";
 import Register from "./Register";
 import PrivateRoute from './PrivateRoute'
+import {ArticleContext} from './context/ArticleContext'
 
-const Dashboard = () => {
+const App = () => {
   const [articleList, setArticleList] = useState([]);
 
   const getArticleList = () => {
@@ -23,8 +24,8 @@ const Dashboard = () => {
 
   return (
     <>
+    <ArticleContext.Provider value={{articleList, setArticleList}}>
       <Link to="/"><button>Home</button></Link>
-      <Link to="/articles"><button>Articles</button></Link>
       <Link to="/add-article"><button>Add Article</button></Link>
       <Link to="/login"><button>Login</button></Link>
       <Link to="/register"><button>Register</button></Link>
@@ -43,8 +44,9 @@ const Dashboard = () => {
 
       <PrivateRoute path="/add-article" component={AddArticle} />
         {/* <AddArticle articleList={articleList} setArticleList={setArticleList} /> */}
+    </ArticleContext.Provider>
     </>
   );
 };
 
-export default Dashboard;
+export default App;
