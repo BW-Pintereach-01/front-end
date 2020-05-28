@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useParams, useHistory} from "react-router-dom";
-import axios from 'axios';
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
 
  const initialState = {title: '', author: '', link: '', category: ''}
 
@@ -10,7 +10,7 @@ const UpdateArticle = ({articleList, setArticleList}) => {
   const {push} = useHistory();
 
   const getArticle = (id) => {
-    axios
+    axiosWithAuth()
       .get(`https://pintereach-1.herokuapp.com/api/articles/${id}`)
       .then((res) => {
         console.log(`getArticle: ${res}`)
@@ -26,7 +26,7 @@ const UpdateArticle = ({articleList, setArticleList}) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    axios
+    axiosWithAuth()
       .put(`https://pintereach-1.herokuapp.com/api/articles/${params.id}`, article)
       .then((res) => console.log(`setArticle: ${res}`))
       .catch((error) => console.log(error.res));
