@@ -3,7 +3,7 @@ import {useHistory} from "react-router-dom";
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 
 const initialState = {
-  title: '', author: '', link: '', category: ''
+  title: '', author: '', link: '', category: '', user_id: null
 }
 
 const AddArticle = () => {
@@ -19,7 +19,6 @@ const AddArticle = () => {
     axiosWithAuth()
       .post(`https://pintereach-1.herokuapp.com/api/articles`, article)
       .then((res) => {
-        console.log(`setArticle: ${JSON.stringify(res)}`)
         setArticle(res.data)})
       .catch((err) => console.log(err.res));
     push('/');

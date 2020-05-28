@@ -32,7 +32,9 @@ const App = () => {
       <Link to="/register"><button>Register</button></Link>
       <Link to="/articles"><button>Articles</button></Link>
 
-      <Route exact path="/login" component={Login} />
+      <Route path="/login">
+        <Login />
+      </Route>
       <Route exact path="/register" component={Register} />
 
       <Route path="/articles">

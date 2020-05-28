@@ -5,7 +5,8 @@ class Login extends React.Component {
   state = {
     credentials: {
       username: "",
-      password: ""
+      password: "",
+      user_id: "",
     }
   };
 
@@ -22,13 +23,15 @@ class Login extends React.Component {
     e.preventDefault();
     axiosWithAuth()
       .post("https://pintereach-1.herokuapp.com/api/auth/login", this.state.credentials)
-      // POST request to login endpoint
-      // if creds match what's in database, server returns JSON web token
       .then(res => {
-        // set token to localStorage (sessions)
-        console.log(`login: ${JSON.stringify(res)}`)
+        this.setState({
+          credentials: {
+            ...this.state.credentials,
+            user_id: res.data.user_id
+          }
+        })
+        console.log(`${JSON.stringify(this.state.credentials)}`)
         localStorage.setItem("token", res.data.token);
-        // navigate user to "/protected" route
         this.props.history.push("/");
       })
       .catch(err => console.log(err));
