@@ -1,6 +1,6 @@
+
 import React from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-
 class Register extends React.Component {
   state = {
     credentials: {
@@ -8,7 +8,6 @@ class Register extends React.Component {
       password: ""
     }
   };
-
   handleChange = e => {
     this.setState({
       credentials: {
@@ -17,18 +16,21 @@ class Register extends React.Component {
       }
     });
   };
-
   register = e => {
     e.preventDefault();
     axiosWithAuth()
       .post("https://pintereach-1.herokuapp.com/api/auth/register", this.state.credentials)
+      // POST request to register endpoint
+      // if creds are valid server returns JSON web token
       .then(res => {
+        // set token to localStorage (sessions)
+        console.log(`register: ${JSON.stringify(res)}`)
         localStorage.setItem("token", res.data.token);
+        // // navigate user to "/protected" route
         this.props.history.push("/");
       })
       .catch(err => console.log(err));
   };
-
   render() {
     return (
       <div className="container">
@@ -58,5 +60,4 @@ class Register extends React.Component {
     );
   }
 }
-
 export default Register;

@@ -1,35 +1,32 @@
-import React, {useState, useContext} from 'react';
+
+import React, {useState} from 'react';
+import {useHistory} from "react-router-dom";
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
-import {ArticleContext} from '../../context/ArticleContext'
-
+const state = {
+  title: '',
+  author: '',
+  link: '',
+  category: ''
+}
 const AddArticle = () => {
-  const [article, setArticle] = useState({
-    title: '',
-    author: '',
-    link: '',
-    category: '',
-    users_id: null
-  });
-  const {userId} = useContext(ArticleContext)
-  console.log(userId)
+  const [article, setArticle] = useState(state);
+  const {push} = useHistory();
+  
   const handleChange = e => {
-    setArticle(
-      { ...article,
-        [e.target.name]: e.target.value,
-        users_id: userId.users_id
-      }
-    )
+    setArticle({ ...article, [e.target.name]: e.target.value})
   }
-
+  
   const handleSubmit = e => {
     e.preventDefault();
     axiosWithAuth()
       .post(`https://pintereach-1.herokuapp.com/api/articles`, article)
       .then((res) => {
+        console.log(res)
         setArticle(res.data)})
       .catch((err) => console.log(err.res));
+    push('/');
   }
-
+  
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-control">
@@ -69,5 +66,4 @@ const AddArticle = () => {
     </form>
   );
 }
-
 export default AddArticle;
