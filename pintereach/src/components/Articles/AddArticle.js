@@ -5,13 +5,22 @@ import {ArticleContext} from '../../context/ArticleContext'
 
 const AddArticle = () => {
   const [article, setArticle] = useState({
-    title: '', author: '', link: '', category: '', users_id: null
+    title: '',
+    author: '',
+    link: '',
+    category: '',
+    users_id: null
   });
   const {userId} = useContext(ArticleContext)
   const {push} = useHistory();
-  console.log(userId)
+
   const handleChange = e => {
-    setArticle({ ...article, [e.target.name]: e.target.value, users_id: userId.users_id})
+    setArticle(
+      { ...article,
+        [e.target.name]: e.target.value,
+        users_id: userId.users_id
+      }
+    )
   }
 
   const handleSubmit = e => {

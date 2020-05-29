@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import {Route, Link} from "react-router-dom";
-import ArticleList from "./Articles/ArticleList";
 import Article from "./Articles/Article";
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import UpdateArticle from "./Articles/UpdateArticle";
@@ -10,21 +9,19 @@ import Register from "./Register";
 import {ArticleContext} from '../context/ArticleContext'
 
 const App = () => {
-  const [articleList, setArticleList] = useState([]);
-  const [credentials, setCredential] = useState([]);
-  const [userId, setUserId] = useState({users_id: null})
+  const [articleList, setArticleList] = useState([ArticleContext]);
+  const [credentials, setCredential] = useState([ArticleContext]);
+  const [userId, setUserId] = useState({user_id: null})
 
   const getArticleList = () => {
     axiosWithAuth()
       .get("https://pintereach-1.herokuapp.com/api/articles")
       .then(res => {
-        console.log(`getArticleList: ${JSON.stringify(res)}`)
-        setArticleList(res.data)})
+        setArticleList(res.data.articles)})
       .catch(err => console.log(err.res));
   };
 
   useEffect(() => {getArticleList();}, []);
-
   return (
     <>
     <ArticleContext.Provider value={{articleList, setArticleList, credentials, setCredential, userId, setUserId}}>
@@ -40,11 +37,7 @@ const App = () => {
       <Route exact path="/register" component={Register} />
 
       <Route path="/articles">
-        <ArticleList articles={articleList} />
-      </Route>
-
-      <Route path="/articles/:id">
-        <Article articleList={articleList} setArticleList={setArticleList} />
+        <Article articles={articleList} setArticleList={setArticleList} />
       </Route>
 
       <Route path="/update-articles/:id">
@@ -52,7 +45,7 @@ const App = () => {
       </Route>
 
       <Route path="/add-article">
-      <AddArticle articleList={articleList} setArticleList={setArticleList} />
+        <AddArticle articleList={articleList} setArticleList={setArticleList} />
       </Route>
     </ArticleContext.Provider>
     </>

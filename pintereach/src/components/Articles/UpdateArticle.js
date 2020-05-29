@@ -11,9 +11,8 @@ const UpdateArticle = ({articleList, setArticleList}) => {
 
   const getArticle = (id) => {
     axiosWithAuth()
-      .get(`https://pintereach-1.herokuapp.com/api/articles/${id}`)
+      .get(`https://pintereach-1.herokuapp.com/api/articles/`)
       .then((res) => {
-        console.log(`getArticle: ${JSON.stringify(res)}`)
         setArticle(res.data)})
       .catch((error) => console.log(error.res));
   };
@@ -27,8 +26,8 @@ const UpdateArticle = ({articleList, setArticleList}) => {
   const handleSubmit = e => {
     e.preventDefault();
     axiosWithAuth()
-      .put(`https://pintereach-1.herokuapp.com/api/articles/${params.id}`, article)
-      .then((res) => console.log(`setArticle: ${JSON.stringify(res)}`))
+      .put(`https://pintereach-1.herokuapp.com/api/articles/`, article)
+      .then((res) => console.log(res))
       .catch((error) => console.log(error.res));
 
     const newArticleList = articleList.map(e => {

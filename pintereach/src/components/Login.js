@@ -5,7 +5,7 @@ import {ArticleContext} from '../context/ArticleContext'
 const initialState = {
   username: '',
   password: '',
-  users_id: null,
+  user_id: null,
 };
 
 const Login = () => {
@@ -23,10 +23,12 @@ const Login = () => {
     axiosWithAuth()
       .post("https://pintereach-1.herokuapp.com/api/auth/login", credentials)
       .then(res => {
+        console.log(res.data.user_id);
+        console.log(credentials.user_id);
         setUserId({...userId, users_id: res.data.user_id})
-        console.log(userId)
         localStorage.setItem("token", res.data.token);
-        this.props.history.push("/");
+        // console.log(res);
+        // console.log(credentials);
       })
       
       .catch(err => console.log(err));
@@ -37,20 +39,24 @@ const Login = () => {
       <div className="container">
       <form id="form" className="form" onSubmit={handleSubmit}>
         <h2>Login</h2>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            value={credentials.username}
-            onChange={handleChange}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={credentials.password}
-            onChange={handleChange}
-          />
+          <div className="form-control">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              name="username"
+              value={credentials.username}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-control">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              value={credentials.password}
+              onChange={handleChange}
+            />
+          </div>
         <button type="submit">Login</button>
       </form>
     </div>
