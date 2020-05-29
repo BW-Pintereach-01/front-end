@@ -1,5 +1,4 @@
 import React, {useState, useContext} from 'react';
-import {useHistory} from "react-router-dom";
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import {ArticleContext} from '../../context/ArticleContext'
 
@@ -12,8 +11,7 @@ const AddArticle = () => {
     users_id: null
   });
   const {userId} = useContext(ArticleContext)
-  const {push} = useHistory();
-
+  console.log(userId)
   const handleChange = e => {
     setArticle(
       { ...article,
@@ -30,7 +28,6 @@ const AddArticle = () => {
       .then((res) => {
         setArticle(res.data)})
       .catch((err) => console.log(err.res));
-    push('/');
   }
 
   return (

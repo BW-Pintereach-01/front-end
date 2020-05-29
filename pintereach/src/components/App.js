@@ -45,7 +45,7 @@ const App = () => {
       </Route>
 
       <Route path="/add-article">
-        <AddArticle articleList={articleList} setArticleList={setArticleList} />
+        <AddArticle articleList={articleList} setArticleList={setArticleList} userId={userId} setUserId={setUserId} />
       </Route>
     </ArticleContext.Provider>
     </>
