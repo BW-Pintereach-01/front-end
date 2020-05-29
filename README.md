@@ -74,6 +74,27 @@ render() {
 }
  ```
  
+`axiosWithAuth` is a utility method that sets an authentication token to the browsers localStorage. This allows users to continuously browser protected content without having to authenticate with every requests.
+ 
+ ```javascript
+export const axiosWithAuth = () => {
+  const token = localStorage.getItem("token");
+  return axios.create({
+    headers: {
+      Authorization: token
+    },
+  });
+};
+```
+ 
+createContext is passed to ArticleContext and set
+ 
+ ```javascript
+import { createContext } from 'react';
+export const ArticleContext = createContext();
+```
+ 
+ 
  # CRUD Articles
  
  ### Article
@@ -116,7 +137,7 @@ useEffect(() => {fetchArticle(params.id);}, [params.id]);
 
 #### DELETE
 
-`deleteArticle` makes a request to the `/api/articles` endpoint with the id for the article to be deleted. `setArticleList` filter's through `articleList` searching for all articles aside from the one being delete. Remaining articles are set to `articleList`.
+`deleteArticle` makes a request to the `/api/articles` endpoint with the id for the article to be deleted. `setArticleList` filter's through `articleList` searching for all articles aside from the one being deleted. Remaining articles are set to `articleList`.
 
 ```javascript
   const deleteArticle = () => {
@@ -173,7 +194,7 @@ const ArticleCard = props => {
 
 ### AddArticle
 
-`AddArticle` component takes in `initialState` object which contains blank key/value pairs for article title, article author, article link, and article category. `setArticleList` takes in the response data from the POST request.
+`AddArticle` component takes in `state` object which contains blank key/value pairs for article title, article author, article link, and article category. `setArticles` takes in the response data from the POST request.
  
  ```javascript
 const initialState = {
@@ -181,11 +202,11 @@ const initialState = {
 }
 
 const AddArticle = ({articleList, setArticleList}) => {
-  const [article, setArticle] = useState(initialState);
+  const [article, setArticle] = useState(state);
   const {push} = useHistory();
 
   const handleChange = e => {
-    setArticle({ ...article, [e.target.name]: e.target.value})
+    setArticles({ ...article, [e.target.name]: e.target.value})
   }
 
   const handleSubmit = e => {
@@ -224,34 +245,6 @@ return (
     <button>Add Article</button>
   </form>
 );
-```
-
-### UpdateArticle
-
-`UpdateArticle` component takes in `initialState` object which contains blank key/value pairs for article title, article author, article link, and article category. `article` is passed into `setArticle` with the `handleChange` function. `setArticle` takes in the response data for `GET` request. `getArticle` takes in the id of whatever article is being updated with `params`.
-
-```javascript
-const initialState = {title: '', author: '', link: '', category: ''}
-
-const UpdateArticle = ({articleList, setArticleList}) => {
-  const [article, setArticle] = useState(initialState);
-  const params = useParams();
-  const {push} = useHistory();
-
-  const getArticle = (id) => {
-    axiosWithAuth()
-      .get(`https://pintereach-1.herokuapp.com/api/articles/${id}`)
-      .then((res) => {
-        console.log(`getArticle: ${res}`)
-        setArticle(res.data)})
-      .catch((error) => console.log(error.res));
-  };
-
-  useEffect(() => {getArticle(params.id);}, [params.id])
-
-  const handleChange = e => {
-    setArticle({ ...article, [e.target.name]: e.target.value})
-  }
 ```
 
 `newArticleList` maps over articleList and checks for the matching id of article.
@@ -301,54 +294,4 @@ return (
     <button>Update Article</button>
   </form>
 )
-```
-
-## App
-
-```javascript
-const App = () => {
-  const [articleList, setArticleList] = useState([]);
-
-  const getArticleList = () => {
-    axiosWithAuth()
-      .get("https://pintereach-1.herokuapp.com/api/articles")
-      .then(res => {
-        console.log(`getArticleList: ${res}`)
-        setArticleList(res.data)})
-      .catch(err => console.log(err.res));
-  };
-
-  useEffect(() => {getArticleList();}, []);
-
-  return (
-    <>
-    <ArticleContext.Provider value={{articleList, setArticleList}}>
-      <Link to="/"><button>Home</button></Link>
-      <Link to="/add-article"><button>Add Article</button></Link>
-      <Link to="/login"><button>Login</button></Link>
-      <Link to="/register"><button>Register</button></Link>
-      <Link to="/articles"><button>Articles</button></Link>
-
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/register" component={Register} />
-
-      <Route path="/articles">
-        <ArticleList articles={articleList} />
-      </Route>
-
-      <Route path="/articles/:id">
-        <Article articleList={articleList} setArticleList={setArticleList} />
-      </Route>
-
-      <Route path="/update-articles/:id">
-        <UpdateArticle articleList={articleList} setArticleList={setArticleList} />
-      </Route>
-
-      <Route path="/add-article">
-      <AddArticle articleList={articleList} setArticleList={setArticleList} />
-      </Route>
-    </ArticleContext.Provider>
-    </>
-  );
-};
 ```
