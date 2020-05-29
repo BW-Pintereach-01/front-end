@@ -24,7 +24,6 @@ class Register extends React.Component {
       .post("https://pintereach-1.herokuapp.com/api/auth/register", this.state.credentials)
       .then(res => {
         localStorage.setItem("token", res.data.token);
-        this.props.history.push("/");
       })
       .catch(err => console.log(err));
   };

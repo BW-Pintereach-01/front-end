@@ -9,7 +9,7 @@ const initialState = {
 };
 
 const Login = () => {
-  const {userId, setUserId} = useContext(ArticleContext);
+  const {userId, setUserId} = useState(ArticleContext);
   const [credentials, setCredential] = useState(initialState)
 
   const handleChange = e => {
@@ -23,12 +23,8 @@ const Login = () => {
     axiosWithAuth()
       .post("https://pintereach-1.herokuapp.com/api/auth/login", credentials)
       .then(res => {
-        console.log(res.data.user_id);
-        console.log(credentials.user_id);
         setUserId({...userId, users_id: res.data.user_id})
         localStorage.setItem("token", res.data.token);
-        // console.log(res);
-        // console.log(credentials);
       })
       
       .catch(err => console.log(err));
